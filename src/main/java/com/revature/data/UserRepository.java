@@ -1,6 +1,7 @@
 package com.revature.data;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,14 +12,14 @@ import com.revature.model.User;
 
 
 @Repository // Stereotype Annotation! Repository, Controller, RESTController, Service
-public interface UserRepository extends JpaRepository<User, Integer>{
+public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	// spring automatically creates .save(), update(), delete, findAll(), findById
 	
 	//Property Expressions ~ custom methods to find Users based on their properties
 	Optional<User> findByUsername(String username);
 	
-	List<User> findByOrderByLastName(String lastName); // returns all the users in the DB sorted by their last name
+	List<User> findByOrderByLastName(); // returns all the users in the DB sorted by their last name
 	
 	//custom query
 	@Query("FROM User WHERE email LIKE %:pattern")

@@ -1,6 +1,7 @@
 package com.revature.model;
 
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,7 +36,7 @@ public class User {
 	
 	@NotBlank
 	@Length(min=5)
-	@Pattern(regexp = "[a-zA-Z][a-zA-Z0-9]") // regex - regular expressions to make sure a username is alphanumeric only
+	@Pattern(regexp = "[a-zA-Z][a-zA-Z0-9]*") // regex - regular expressions to make sure a username is alphanumeric only
 	private String username;
 	
 	@NotBlank
