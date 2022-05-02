@@ -53,7 +53,7 @@ public class UserController {
 	}
 	
 	// Find a user by their username
-	@GetMapping("/{username}")
+	@GetMapping("/find/{username}")
 	public ResponseEntity<User> findUserByUsername(@PathVariable("username") String username) {
 		
 		return ResponseEntity.ok(userServ.getByUsername(username));
