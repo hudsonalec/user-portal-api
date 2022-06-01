@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.data.AddressRepository;
 import com.revature.data.UserRepository;
+import com.revature.exception.AuthenticationException;
 import com.revature.exception.UserNotFoundException;
 import com.revature.model.User;
 
@@ -25,6 +26,22 @@ public class UserService {
 	private AddressRepository addressRepo;
 	
 	private Logger log = LoggerFactory.getLogger(this.getClass());
+	
+	// calls on the DB (by way of the User Repository) to check the credentials of the user that's logging in
+	public User authenticate(User user) {
+		
+		// asks the question: are you who you say you are and do you exist in the DB?
+		User userInDb = userRepo.findByUsername(user.getUsername())
+				.orElseThrow(AuthenticationException::new); // instantiate a new Authentication exception IF the username doesn't exist
+		
+		// test the password
+		if (user.getPassword().equals(userInDb.getPassword())) {
+			return userInDb;
+		}
+		
+		throw new AuthenticationException();
+		
+	}
 	
 	
 	/**
